@@ -1,8 +1,14 @@
 import fetch from 'node-fetch';
 
 async function isUp(url) {
+  const before = Date.now();
   const res = await fetch(url);
-  return res.ok;
+  const after = Date.now();
+
+  return {
+    status: res,
+    time: (after - before) / 1000,
+  };
 }
 
 
