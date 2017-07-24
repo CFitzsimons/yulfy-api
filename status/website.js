@@ -6,7 +6,7 @@ async function isUp(url) {
   const after = Date.now();
 
   return {
-    status: res,
+    status: res.ok,
     time: (after - before) / 1000,
   };
 }
