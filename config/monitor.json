@@ -1,0 +1,16 @@
+{
+  "websites": [
+    {
+      "name": "Personal Site (live)",
+      "url": "http://yulfy.eu"
+    },
+    {
+      "name": "Personal Site (test)",
+      "url": "http://yulfy.com"
+    },
+    {
+      "name": "Ballzey (live)",
+      "url": "http://demonstration.yulfy.com"
+    }
+  ]
+}
