@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config';
 import fs from 'fs';
 import https from 'https';
 import http from 'http';
@@ -14,12 +15,12 @@ app.use(bodyParser.json());
 
 configureRoutes(app);
 
-const isSSLEnabled = process.env.SSL_ENABlED === 'true';
+const isSSLEnabled = process.env.SSL_ENABLED === 'true';
 
 const getOptions = () => {
   try {
-    const key = fs.readFileSync('../certs/ssl.key');
-    const cert = fs.readFileSync('../certs/cert.key');
+    const key = fs.readFileSync('./certs/ssl.key');
+    const cert = fs.readFileSync('./certs/ssl.pem');
     return {
       key,
       cert,
