@@ -3,6 +3,7 @@ import z from 'zod';
 import crypto from 'crypto';
 import { Events, EventType } from '../types/event.type';
 import { Presence } from '../validators/presence.zod';
+import { insert, select } from '../models/user.model';
 
 const validation = (req: Express.Request, res: Express.Response) => {
   const { plainToken } = req.body.payload;
@@ -17,12 +18,9 @@ const validation = (req: Express.Request, res: Express.Response) => {
 const presence = (req: Express.Request, res: Express.Response) => {
   const { object: presenceObject } = req.body.payload;
   const presence = Presence.parse(presenceObject);
-  
-  console.log(presence);
-  res.send(200);
+  insert(presence.email, presence.presence_status);
+  res.send('Ok');
 };
-
-
 
 const events: Events = {
   [EventType.ENDPOINT_VALIDATION]: validation,
@@ -39,7 +37,15 @@ const listen = (req: Express.Request, res: Express.Response) => {
 };
 
 const get = (req: Express.Request, res: Express.Response) => {
-
+  const { email } = req.body;
+  if (!email) {
+    return res.status(500).send('Email is a required field.');
+  }
+  const status = select(email);
+  if (!status) {
+    return res.status(500).send('Email does not have a status, probably not subscribed.');
+  }
+  return res.send(status);
 };
 
 export default { get, listen };
