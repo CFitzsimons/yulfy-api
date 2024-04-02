@@ -2,6 +2,7 @@ import Express from 'express';
 import z from 'zod';
 import crypto from 'crypto';
 import { Events, EventType } from '../types/event.type';
+import { Presence } from '../validators/presence.zod';
 
 const validation = (req: Express.Request, res: Express.Response) => {
   const { plainToken } = req.body.payload;
@@ -12,15 +13,6 @@ const validation = (req: Express.Request, res: Express.Response) => {
   const token = crypto.createHmac('sha256', process.env.ZOOM_VERIFICATION_TOKEN).update(plainToken).digest('hex');
   res.send({ plainToken: plainToken, encryptedToken: token });
 };
-
-const PresenceStatus = z.enum(['Offline']);
-
-const Presence = z.object({
-  date_time: z.string().datetime(),
-  email: z.string(),
-  id: z.string(),
-  presence_status: PresenceStatus,
-})
 
 const presence = (req: Express.Request, res: Express.Response) => {
   const { object: presenceObject } = req.body.payload;
