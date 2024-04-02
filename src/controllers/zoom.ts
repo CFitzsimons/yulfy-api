@@ -3,17 +3,6 @@ import z from 'zod';
 import crypto from 'crypto';
 import { Events, EventType } from '../types/event.type';
 
-const eventAsType = (event: string | undefined): EventType | undefined => {
-  if (event === undefined) {
-    return;
-  }
-  const type = EventType[event as keyof typeof EventType];
-  if (!type) {
-    return;
-  }
-  return type;
-}
-
 const validation = (req: Express.Request, res: Express.Response) => {
   const { plainToken } = req.body.payload;
   if (!process.env.ZOOM_VERIFICATION_TOKEN) {
@@ -23,17 +12,6 @@ const validation = (req: Express.Request, res: Express.Response) => {
   const token = crypto.createHmac('sha256', process.env.ZOOM_VERIFICATION_TOKEN).update(plainToken).digest('hex');
   res.send({ plainToken: plainToken, encryptedToken: token });
 };
-
-type PresencePayload = {
-  date_time: string;
-  email: string;
-  id: string;
-  presence_status: string;
-}
-
-// enum PresenceStatus {
-//   OFFLINE = 'Offline';
-// }
 
 const PresenceStatus = z.enum(['Offline']);
 
@@ -60,10 +38,7 @@ const events: Events = {
 };
 
 const listen = (req: Express.Request, res: Express.Response) => {
-  const eventType = eventAsType(req.body.event);
-  if (eventType === undefined) {
-    return res.status(500).send('No event type');
-  }
+  const eventType = z.nativeEnum(EventType).parse(req.body.event);
   const eventHandler = events[eventType];
   if (eventHandler) {
     return eventHandler(req, res);
