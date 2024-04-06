@@ -1,5 +1,5 @@
 import Express from 'express';
-import zoom from '../controllers/zoom';
+import zoom from '../controllers/zoom/zoom';
 
 const routes = (app: Express.Application): void => {
   app.get('/zoom/status', zoom.get);
