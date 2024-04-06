@@ -1,0 +1,24 @@
+diff --git a/node_modules/node-test-github-reporter/index.js b/node_modules/node-test-github-reporter/index.js
+index 572daf4..a6d9b88 100644
+--- a/node_modules/node-test-github-reporter/index.js
++++ b/node_modules/node-test-github-reporter/index.js
+@@ -1,6 +1,7 @@
+ import { summary, error as annotateError } from '@actions/core'
+ import ErrorStackParser from 'error-stack-parser'
+ import parseReport from 'node-test-parser'
++import path from 'path'
+ import StackUtils from 'stack-utils'
+ 
+ const workspace = process.env.GITHUB_WORKSPACE
+@@ -110,9 +111,9 @@ function findErrorLocation(error) {
+   if (!firstFrame) {
+     return
+   }
+-
++  // console.log(path.url);
+   return {
+-    file: getRelativeFilePath(firstFrame.fileName),
++    file: getRelativeFilePath('file://' + firstFrame.fileName),
+     startLine: firstFrame.lineNumber,
+     startColumn: firstFrame.columnNumber
+   }
