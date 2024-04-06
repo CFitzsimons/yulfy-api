@@ -26,7 +26,6 @@ const validation = (req: Express.Request, res: Express.Response) => {
 };
 
 const presence = (req: Express.Request, res: Express.Response) => {
-  console.log(req.body);
   const { object: presenceObject } = req.body.payload;
   const presence = Presence.parse(presenceObject);
   insert(presence.email, presence.presence_status);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "patch-package",
-    "start": "nodemon src/app.ts",
+    "start": "nodemon --ignore 'data/*.json' src/app.ts",
     "testlocal": "node --test --require ts-node/register ./tests/**/**.test.ts",
     "test": "node --test --test-reporter node-test-github-reporter --require ts-node/register ./tests/**/**.test.ts"
   },
