@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/app.ts",
+    "testlocal": "node --test --require ts-node/register ./tests/**/**.test.ts",
     "test": "node --test --test-reporter junit --test-reporter-destination=test-artifact.xml --require ts-node/register ./tests/**/**.test.ts"
   },
   "keywords": [],
