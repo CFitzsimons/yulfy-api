@@ -3,4 +3,5 @@ node_modules
 *.crt
 *.key
 *.pem
+test-artifact.xml
 
