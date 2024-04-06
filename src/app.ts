@@ -5,6 +5,7 @@ import https from 'https';
 import http from 'http';
 import configureRoutes from './routes';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 const app = express();
 const port = parseInt(process.env.PORT ?? '3000', 10);
@@ -12,6 +13,8 @@ const port = parseInt(process.env.PORT ?? '3000', 10);
 //Parses json
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(morgan('tiny'));
 
 configureRoutes(app);
 
@@ -29,7 +32,7 @@ const getOptions = () => {
     console.error('Could not read key or cert.');
     throw err;
   }
-}
+};
 
 let server;
 
