@@ -155,7 +155,7 @@ describe('Zoom', () => {
       assert(res.status.calledOnceWith(400));
       assert(
         res.send.calledOnceWith(
-          'Email does not have a status, probably not subscribed.'
+          'Email does not have a status, probably not subscribed. FAIL'
         )
       );
     });
