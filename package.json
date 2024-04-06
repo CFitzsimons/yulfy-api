@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/app.ts",
     "testlocal": "node --test --require ts-node/register ./tests/**/**.test.ts",
-    "test": "node --test --test-reporter junit --test-reporter-destination=test-artifact.xml --require ts-node/register ./tests/**/**.test.ts"
+    "test": "node --test ---test-reporter node-test-github-reporter --require ts-node/register ./tests/**/**.test.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "@types/mock-req-res": "^1.1.6",
     "@types/node": "^20.10.0",
     "mock-req-res": "^1.2.1",
+    "node-test-github-reporter": "^1.1.10",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
