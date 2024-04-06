@@ -11,13 +11,15 @@ const read = (): DataStore => {
   if (!fs.existsSync(filePath)) {
     return new Map();
   }
-  const data = fs.readFileSync(filePath, 'utf-8');
+  const data = new Map(
+    Object.entries(JSON.parse(fs.readFileSync(filePath, 'utf-8')))
+  );
   const store = DataStoreValidator.parse(data);
   return store;
 };
 
 const write = (data: DataStore) => {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  fs.writeFileSync(filePath, JSON.stringify(Object.fromEntries(data), null, 2));
 };
 
 export default {
