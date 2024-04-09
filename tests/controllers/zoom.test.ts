@@ -47,6 +47,7 @@ describe('Zoom', () => {
       }
     });
   });
+
   describe('Presence updater', () => {
     test('should update to different statuses', () => {
       const email = 'test@test.com';
@@ -88,6 +89,7 @@ describe('Zoom', () => {
       }
     });
   });
+
   describe('Validation', () => {
     const plainToken = 'KNOWN_PLAIN_TOKEN';
     const validationToken = 'KNOWN_VERIFICATION_TOKEN';
