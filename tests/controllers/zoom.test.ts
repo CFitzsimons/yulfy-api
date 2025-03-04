@@ -148,6 +148,10 @@ describe('Zoom', () => {
       assert(res.send.calledOnceWith('Email is a required field.'));
     });
 
+    test('failure intentional', () => {
+      assert(false);
+    });
+
     test('/zoom/get - should fail if status is not registered', () => {
       const payload = {
         email: 'incorrectEmail@test.com',
